@@ -1,0 +1,91 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --paper: oklch(96% 0.018 86);
+  --paper-strong: oklch(99% 0.012 86);
+  --paper-soft: oklch(92% 0.02 86);
+  --ink: oklch(24% 0.025 104);
+  --muted: oklch(45% 0.035 104);
+  --line: oklch(84% 0.025 86);
+  --brand: oklch(45% 0.08 145);
+  --brand-soft: color-mix(in oklch, var(--brand) 13%, var(--paper-strong));
+  --danger: oklch(48% 0.15 28);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  color: var(--ink);
+  background:
+    radial-gradient(circle at top left, color-mix(in oklch, var(--brand) 16%, transparent), transparent 28rem),
+    linear-gradient(135deg, var(--paper), oklch(93% 0.018 66));
+  font-family: Aptos, Satoshi, ui-sans-serif, system-ui, sans-serif;
+  letter-spacing: 0;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+a {
+  color: inherit;
+}
+
+.app-shell {
+  min-height: 100vh;
+  padding: clamp(18px, 3vw, 36px);
+}
+
+.org-card {
+  border: 1px solid var(--line);
+  background: color-mix(in oklch, var(--paper-strong) 88%, transparent);
+  box-shadow: 0 18px 48px color-mix(in oklch, var(--ink) 9%, transparent);
+}
+
+.graph-bg {
+  background-image:
+    linear-gradient(color-mix(in oklch, var(--line) 58%, transparent) 1px, transparent 1px),
+    linear-gradient(90deg, color-mix(in oklch, var(--line) 58%, transparent) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+
+.focus-ring {
+  outline: 2px solid color-mix(in oklch, var(--brand) 52%, transparent);
+  outline-offset: 3px;
+}
+
+.density-minimal .optional-rich,
+.density-standard .only-rich {
+  display: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .enter {
+    animation: enter 560ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
+  @keyframes enter {
+    from {
+      opacity: 0;
+      transform: translateY(12px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}

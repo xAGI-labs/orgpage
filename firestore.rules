@@ -1,0 +1,119 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function signedIn() {
+      return request.auth != null;
+    }
+
+    function userEmail() {
+      return request.auth.token.email;
+    }
+
+    function memberPath(orgId, uid) {
+      return /databases/$(database)/documents/organizations/$(orgId)/members/$(uid);
+    }
+
+    function isMember(orgId) {
+      return signedIn() && exists(memberPath(orgId, request.auth.uid));
+    }
+
+    function memberRole(orgId) {
+      return get(memberPath(orgId, request.auth.uid)).data.role;
+    }
+
+    function isOwnerOrAdmin(orgId) {
+      return isMember(orgId) && memberRole(orgId) in ['owner', 'admin'];
+    }
+
+    function inviteMatches(invite) {
+      return signedIn()
+        && invite.status == 'pending'
+        && (!('email' in invite) || invite.email == userEmail());
+    }
+
+    match /users/{userId} {
+      allow read, create, update: if signedIn() && request.auth.uid == userId;
+      allow delete: if false;
+    }
+
+    match /organizations/{orgId} {
+      allow create: if signedIn()
+        && request.resource.data.ownerId == request.auth.uid
+        && request.resource.data.name is string;
+      allow read: if isMember(orgId);
+      allow update: if isOwnerOrAdmin(orgId);
+      allow delete: if signedIn() && memberRole(orgId) == 'owner';
+
+      match /members/{memberId} {
+        allow read: if isMember(orgId);
+        allow create: if signedIn() && (
+          (
+            memberId == request.auth.uid
+            && request.resource.data.role == 'owner'
+            && getAfter(/databases/$(database)/documents/organizations/$(orgId)).data.ownerId == request.auth.uid
+          )
+          || (
+            memberId == request.auth.uid
+            && request.resource.data.role in ['admin', 'member']
+            && request.resource.data.inviteId is string
+            && exists(/databases/$(database)/documents/organizations/$(orgId)/invites/$(request.resource.data.inviteId))
+            && inviteMatches(get(/databases/$(database)/documents/organizations/$(orgId)/invites/$(request.resource.data.inviteId)).data)
+          )
+          || isOwnerOrAdmin(orgId)
+        );
+        allow update: if isOwnerOrAdmin(orgId);
+        allow delete: if signedIn() && memberRole(orgId) == 'owner' && memberId != request.auth.uid;
+      }
+
+      match /announcements/{announcementId} {
+        allow read: if isMember(orgId);
+        allow create, update, delete: if isOwnerOrAdmin(orgId);
+      }
+
+      match /onboardingTasks/{taskId} {
+        allow read: if isMember(orgId);
+        allow create, update, delete: if isOwnerOrAdmin(orgId)
+          || (
+            isMember(orgId)
+            && request.resource.data.diff(resource.data).changedKeys().hasOnly(['completedBy'])
+          );
+      }
+
+      match /links/{linkId} {
+        allow read: if isMember(orgId);
+        allow create, update, delete: if isOwnerOrAdmin(orgId);
+      }
+
+      match /leaderboard/{entryId} {
+        allow read: if isMember(orgId);
+        allow create, update, delete: if isOwnerOrAdmin(orgId);
+      }
+
+      match /shoutouts/{shoutoutId} {
+        allow read: if isMember(orgId) && resource.data.status == 'visible';
+        allow create: if isMember(orgId)
+          && request.resource.data.status == 'visible'
+          && request.resource.data.message is string
+          && request.resource.data.to is string;
+        allow update, delete: if isOwnerOrAdmin(orgId);
+      }
+
+      match /invites/{inviteId} {
+        allow get: if isOwnerOrAdmin(orgId) || inviteMatches(resource.data);
+        allow list: if isOwnerOrAdmin(orgId);
+        allow create: if isOwnerOrAdmin(orgId)
+          && request.resource.data.orgId == orgId
+          && request.resource.data.role in ['admin', 'member']
+          && request.resource.data.status == 'pending';
+        allow update: if isOwnerOrAdmin(orgId)
+          || (
+            inviteMatches(resource.data)
+            && request.resource.data.status == 'accepted'
+            && request.resource.data.acceptedBy == request.auth.uid
+          );
+        allow delete: if isOwnerOrAdmin(orgId);
+      }
+    }
+  }
+}

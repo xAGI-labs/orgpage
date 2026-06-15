@@ -1,0 +1,10 @@
+node_modules
+dist
+release
+.playwright-mcp
+orgpage-*-1280x800.png
+.env
+.env.local
+.firebase
+firebase-debug.log
+*.tsbuildinfo

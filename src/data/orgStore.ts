@@ -45,7 +45,16 @@ function newId(prefix: string) {
   return `${prefix}-${Date.now()}-${Math.random().toString(16).slice(2)}`;
 }
 
-function getDemoBundle(): OrgBundle {
+function canUseChromeStorage() {
+  return typeof chrome !== "undefined" && !!chrome.storage?.local;
+}
+
+async function getDemoBundle(): Promise<OrgBundle> {
+  if (canUseChromeStorage()) {
+    const stored = await chrome.storage.local.get(DEMO_KEY);
+    return (stored[DEMO_KEY] as OrgBundle | undefined) ?? sampleBundle;
+  }
+
   const stored = localStorage.getItem(DEMO_KEY);
   if (!stored) return sampleBundle;
   try {
@@ -55,7 +64,12 @@ function getDemoBundle(): OrgBundle {
   }
 }
 
-function saveDemoBundle(bundle: OrgBundle) {
+async function saveDemoBundle(bundle: OrgBundle) {
+  if (canUseChromeStorage()) {
+    await chrome.storage.local.set({ [DEMO_KEY]: bundle });
+    return;
+  }
+
   localStorage.setItem(DEMO_KEY, JSON.stringify(bundle));
 }
 
@@ -175,7 +189,7 @@ export async function createOrganization(user: AppUser, name: string, theme: Par
       shoutouts: [],
       invites: []
     };
-    saveDemoBundle(bundle);
+    await saveDemoBundle(bundle);
     trackEvent("org_created");
     return bundle;
   }
@@ -201,7 +215,7 @@ export async function createOrganization(user: AppUser, name: string, theme: Par
 export async function updateOrganization(bundle: OrgBundle, patch: Partial<Organization>) {
   if (!isFirebaseConfigured || !db) {
     const next = { ...bundle, org: { ...bundle.org, ...patch } };
-    saveDemoBundle(next);
+    await saveDemoBundle(next);
     return next;
   }
   await updateDoc(doc(db, "organizations", bundle.org.id), patch);
@@ -222,7 +236,7 @@ export async function createAnnouncement(bundle: OrgBundle, user: AppUser, input
 
   if (!isFirebaseConfigured || !db) {
     const next = { ...bundle, announcements: [announcement, ...bundle.announcements] };
-    saveDemoBundle(next);
+    await saveDemoBundle(next);
     trackEvent("announcement_created");
     return next;
   }
@@ -236,7 +250,7 @@ export async function createLink(bundle: OrgBundle, input: Omit<CompanyLink, "id
   const link: CompanyLink = { id: newId("link"), ...input, createdAt: nowOrServer() };
   if (!isFirebaseConfigured || !db) {
     const next = { ...bundle, links: [...bundle.links, link] };
-    saveDemoBundle(next);
+    await saveDemoBundle(next);
     return next;
   }
   await setDoc(doc(db, "organizations", bundle.org.id, "links", link.id), link);
@@ -247,7 +261,7 @@ export async function createTask(bundle: OrgBundle, input: Omit<OnboardingTask, 
   const task: OnboardingTask = { id: newId("task"), ...input, completedBy: [], createdAt: nowOrServer() };
   if (!isFirebaseConfigured || !db) {
     const next = { ...bundle, onboardingTasks: [...bundle.onboardingTasks, task] };
-    saveDemoBundle(next);
+    await saveDemoBundle(next);
     return next;
   }
   await setDoc(doc(db, "organizations", bundle.org.id, "onboardingTasks", task.id), task);
@@ -258,7 +272,7 @@ export async function createLeaderboardEntry(bundle: OrgBundle, input: Omit<Lead
   const entry: LeaderboardEntry = { id: newId("leaderboard"), ...input, createdAt: nowOrServer() };
   if (!isFirebaseConfigured || !db) {
     const next = { ...bundle, leaderboard: [...bundle.leaderboard, entry].sort((a, b) => b.score - a.score) };
-    saveDemoBundle(next);
+    await saveDemoBundle(next);
     return next;
   }
   await setDoc(doc(db, "organizations", bundle.org.id, "leaderboard", entry.id), entry);
@@ -275,7 +289,7 @@ export async function completeTask(bundle: OrgBundle, taskId: string, user: AppU
           : task
       )
     };
-    saveDemoBundle(next);
+    await saveDemoBundle(next);
     trackEvent("onboarding_task_completed");
     return next;
   }
@@ -293,7 +307,7 @@ export async function setShoutoutStatus(bundle: OrgBundle, shoutoutId: string, s
       ...bundle,
       shoutouts: bundle.shoutouts.map((shoutout) => (shoutout.id === shoutoutId ? { ...shoutout, status } : shoutout))
     };
-    saveDemoBundle(next);
+    await saveDemoBundle(next);
     return next;
   }
   await updateDoc(doc(db, "organizations", bundle.org.id, "shoutouts", shoutoutId), { status });
@@ -312,7 +326,7 @@ export async function createShoutout(bundle: OrgBundle, user: AppUser, input: Pi
 
   if (!isFirebaseConfigured || !db) {
     const next = { ...bundle, shoutouts: [shoutout, ...bundle.shoutouts] };
-    saveDemoBundle(next);
+    await saveDemoBundle(next);
     trackEvent("shoutout_created");
     return next;
   }
@@ -340,7 +354,7 @@ export async function createInvite(
 
   if (!isFirebaseConfigured || !db) {
     const next = { ...bundle, invites: [invite, ...bundle.invites] };
-    saveDemoBundle(next);
+    await saveDemoBundle(next);
     trackEvent("invite_created");
     return { bundle: next, invite };
   }
@@ -356,7 +370,7 @@ export async function revokeInvite(bundle: OrgBundle, inviteId: string) {
       ...bundle,
       invites: bundle.invites.map((invite) => (invite.inviteId === inviteId ? { ...invite, status: "revoked" as const } : invite))
     };
-    saveDemoBundle(next);
+    await saveDemoBundle(next);
     return next;
   }
   await updateDoc(doc(db, "organizations", bundle.org.id, "invites", inviteId), { status: "revoked" });
@@ -365,7 +379,7 @@ export async function revokeInvite(bundle: OrgBundle, inviteId: string) {
 
 export async function acceptInvite(inviteId: string, user: AppUser, orgId?: string) {
   if (!isFirebaseConfigured || !db) {
-    const bundle = getDemoBundle();
+    const bundle = await getDemoBundle();
     const invite = bundle.invites.find((item) => item.inviteId === inviteId);
     if (!invite || invite.status !== "pending") throw new Error("This invite is not available.");
     if (invite.email && invite.email !== user.email?.toLowerCase()) throw new Error("This invite is for a different email address.");
@@ -389,7 +403,7 @@ export async function acceptInvite(inviteId: string, user: AppUser, orgId?: stri
           : item
       )
     };
-    saveDemoBundle(next);
+    await saveDemoBundle(next);
     trackEvent("invite_accepted");
     return next;
   }

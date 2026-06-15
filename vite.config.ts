@@ -21,7 +21,7 @@ function orgpageManifest(env: Record<string, string>): Plugin {
         chrome_url_overrides: {
           newtab: "index.html"
         },
-        permissions: ["identity"],
+        permissions: ["identity", "storage"],
         host_permissions: [
           "https://*.googleapis.com/*",
           "https://*.firebaseio.com/*",

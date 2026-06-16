@@ -1,4 +1,4 @@
-import { ExternalLink, LogOut, Settings, Sparkles } from "lucide-react";
+import { LogOut, Settings } from "lucide-react";
 import type { CSSProperties } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "../components/Button";
@@ -6,14 +6,20 @@ import { ProfileAvatar } from "../components/ProfileAvatar";
 import { useAuth } from "../context/AuthContext";
 import { useOrg } from "../context/OrgContext";
 import { canManage } from "../data/orgStore";
-import { CalendarPlaceholderWidget } from "../widgets/CalendarPlaceholderWidget";
 import { AnnouncementWidget } from "../widgets/AnnouncementWidget";
+import { CalendarPlaceholderWidget } from "../widgets/CalendarPlaceholderWidget";
 import { LeaderboardWidget } from "../widgets/LeaderboardWidget";
 import { LinksWidget } from "../widgets/LinksWidget";
 import { OnboardingWidget } from "../widgets/OnboardingWidget";
-import { QuickActionsWidget } from "../widgets/QuickActionsWidget";
 import { ShoutoutsWidget } from "../widgets/ShoutoutsWidget";
 import { WelcomeWidget } from "../widgets/WelcomeWidget";
+
+const todayLabel = () =>
+  new Intl.DateTimeFormat(undefined, {
+    weekday: "long",
+    month: "long",
+    day: "numeric"
+  }).format(new Date());
 
 export function NewTabPage() {
   const { user, logout } = useAuth();
@@ -25,70 +31,85 @@ export function NewTabPage() {
   const theme = org.theme;
   const densityClass = `density-${theme.density}`;
 
+  const quietWidgets = [
+    theme.widgets.links ? <LinksWidget key="links" tone="quiet" /> : null,
+    theme.widgets.leaderboard ? <LeaderboardWidget key="leaderboard" tone="quiet" /> : null,
+    theme.widgets.calendar ? <CalendarPlaceholderWidget key="calendar" tone="quiet" /> : null
+  ].filter(Boolean);
+
   return (
     <main
       className={`app-shell ${densityClass} ${theme.backgroundStyle === "graph" ? "graph-bg" : ""}`}
       style={{ "--brand": theme.brandColor } as CSSProperties}
     >
-      <div className="mx-auto max-w-7xl">
-        <header className="mb-6 flex flex-col gap-4 rounded-lg border border-[var(--line)] bg-[var(--paper-strong)]/80 p-4 md:flex-row md:items-center md:justify-between">
-          <div className="flex items-center gap-4">
+      <div className="mx-auto max-w-6xl">
+        <header className="org-bar mb-6 flex flex-col gap-3 rounded-lg px-4 py-3 sm:flex-row sm:items-center sm:justify-between">
+          <div className="flex items-center gap-3">
             {org.logoUrl ? (
-              <img src={org.logoUrl} alt="" className="h-12 w-12 rounded-md object-cover" />
+              <img src={org.logoUrl} alt="" className="h-10 w-10 rounded-md object-cover" />
             ) : (
-              <div className="grid h-12 w-12 place-items-center rounded-md bg-[var(--brand)] font-display text-2xl font-black text-white">
+              <div
+                aria-hidden="true"
+                className="grid h-10 w-10 place-items-center rounded-md bg-[var(--brand)] font-display text-lg font-black text-white"
+              >
                 {org.name[0]}
               </div>
             )}
-            <div>
-              <p className="text-sm font-bold uppercase tracking-[0.14em] text-[var(--muted)]">{org.name}</p>
-              <h1 className="font-display text-3xl font-black leading-none md:text-4xl">{theme.heroMessage}</h1>
+            <div className="min-w-0">
+              <p className="truncate text-sm font-bold text-[var(--ink)]">{org.name}</p>
+              {theme.heroMessage ? (
+                <p className="truncate text-xs text-[var(--muted)]">{theme.heroMessage}</p>
+              ) : null}
             </div>
           </div>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1.5">
             {canManage(member.role) ? (
               <Link to="/admin">
-                <Button variant="secondary" icon={<Settings className="h-4 w-4" />}>
+                <Button variant="ghost" icon={<Settings className="h-4 w-4" />}>
                   Admin
                 </Button>
               </Link>
             ) : null}
-            <Button variant="ghost" onClick={logout} icon={<LogOut className="h-4 w-4" />}>
-              Logout
+            <Button variant="ghost" onClick={logout} icon={<LogOut className="h-4 w-4" />} aria-label="Sign out">
+              <span className="sr-only sm:not-sr-only">Logout</span>
             </Button>
             <ProfileAvatar name={user.displayName} src={user.photoURL} />
           </div>
         </header>
 
-        <section className="mb-6 grid gap-4 lg:grid-cols-[1fr_0.7fr]">
-          <div className="rounded-lg bg-[var(--brand)] p-6 text-white shadow-paper-lift">
-            <div className="flex items-start gap-3">
-              <Sparkles className="mt-1 h-5 w-5 shrink-0" />
-              <div>
-                <p className="text-sm font-black uppercase tracking-[0.14em] opacity-75">Today&apos;s focus</p>
-                <p className="mt-2 text-2xl font-black leading-tight">{org.pinnedUpdate}</p>
-              </div>
-            </div>
-          </div>
-          <QuickActionsWidget />
+        <section className="hero-today enter mb-8 rounded-lg p-6 md:p-8">
+          <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-[var(--muted)]">
+            Today &middot; {todayLabel()}
+          </p>
+          <p
+            className="mt-3 font-display text-2xl font-bold leading-tight text-[var(--ink)] md:text-3xl"
+            style={{ textWrap: "balance" } as CSSProperties}
+          >
+            {org.pinnedUpdate}
+          </p>
         </section>
 
-        <section className="grid gap-4 lg:grid-cols-12">
-          {theme.widgets.welcome ? <WelcomeWidget className="lg:col-span-5" /> : null}
+        <section className="mb-6 grid gap-4 md:grid-cols-2 lg:grid-cols-12">
           {theme.widgets.announcements ? <AnnouncementWidget className="lg:col-span-7" /> : null}
-          {theme.widgets.onboarding ? <OnboardingWidget className="lg:col-span-4" /> : null}
-          {theme.widgets.links ? <LinksWidget className="lg:col-span-4" /> : null}
-          {theme.widgets.leaderboard ? <LeaderboardWidget className="lg:col-span-4" /> : null}
-          {theme.widgets.shoutouts ? <ShoutoutsWidget className="lg:col-span-8" /> : null}
-          {theme.widgets.calendar ? <CalendarPlaceholderWidget className="lg:col-span-4" /> : null}
+          {theme.widgets.onboarding ? <OnboardingWidget className="lg:col-span-5" /> : null}
         </section>
 
-        <footer className="mt-8 flex items-center justify-between border-t border-[var(--line)] pt-5 text-xs font-semibold text-[var(--muted)]">
-          <span>Orgpage replaces your Chrome new tab.</span>
-          <a href="https://firebase.google.com/docs" target="_blank" rel="noreferrer" className="inline-flex items-center gap-1 hover:text-[var(--ink)]">
-            Firebase docs <ExternalLink className="h-3 w-3" />
-          </a>
-        </footer>
+        <section className="mb-8 grid gap-4 md:grid-cols-2 lg:grid-cols-12">
+          {theme.widgets.shoutouts ? <ShoutoutsWidget className="lg:col-span-7" /> : null}
+          {theme.widgets.welcome ? <WelcomeWidget className="lg:col-span-5" /> : null}
+        </section>
+
+        {quietWidgets.length > 0 ? (
+          <section
+            className="grid gap-x-6 gap-y-5 sm:grid-cols-2"
+            style={{
+              gridTemplateColumns:
+                quietWidgets.length >= 3 ? "repeat(auto-fit, minmax(220px, 1fr))" : undefined
+            }}
+          >
+            {quietWidgets}
+          </section>
+        ) : null}
       </div>
     </main>
   );

@@ -2,31 +2,36 @@ import { Trophy } from "lucide-react";
 import { WidgetShell } from "../components/WidgetShell";
 import { useOrg } from "../context/OrgContext";
 
-export function LeaderboardWidget({ className }: { className?: string }) {
+export function LeaderboardWidget({ className, tone }: { className?: string; tone?: "primary" | "quiet" }) {
   const { bundle } = useOrg();
   if (!bundle) return null;
 
   return (
-    <WidgetShell title="Leaderboard" eyebrow="Momentum" className={className}>
-      <div className="grid gap-3">
+    <WidgetShell title="Leaderboard" eyebrow="Momentum" className={className} tone={tone}>
+      <ol className="grid gap-2">
         {bundle.leaderboard.length === 0 ? (
-          <p className="rounded-md bg-[var(--brand-soft)] p-4 text-sm font-semibold text-[var(--muted)]">No leaderboard entries yet.</p>
+          <li className="rounded-md border border-[var(--line)] p-4 text-sm font-semibold text-[var(--muted)]">No leaderboard entries yet.</li>
         ) : (
           bundle.leaderboard.map((entry, index) => (
-            <div key={entry.id} className="flex items-center gap-3 rounded-md bg-[var(--brand-soft)] p-3">
-              <div className="grid h-9 w-9 place-items-center rounded-md bg-[var(--paper-strong)] font-black">{index + 1}</div>
+            <li key={entry.id} className="flex items-center gap-3 py-1">
+              <span
+                aria-hidden="true"
+                className="grid h-7 w-7 shrink-0 place-items-center rounded-md text-xs font-bold text-[var(--muted)]"
+              >
+                {index + 1}
+              </span>
               <div className="min-w-0 flex-1">
-                <p className="truncate font-bold">{entry.name}</p>
-                <p className="text-xs font-semibold text-[var(--muted)]">{entry.label}</p>
+                <p className="truncate text-sm font-bold text-[var(--ink)]">{entry.name}</p>
+                <p className="truncate text-xs text-[var(--muted)]">{entry.label}</p>
               </div>
-              <div className="flex items-center gap-1 font-black text-[var(--brand)]">
-                <Trophy className="h-4 w-4" />
+              <span className="flex shrink-0 items-center gap-1 text-sm font-bold text-[var(--ink)]">
+                <Trophy className="h-3.5 w-3.5 text-[var(--brand)]" aria-hidden="true" />
                 {entry.score}
-              </div>
-            </div>
+              </span>
+            </li>
           ))
         )}
-      </div>
+      </ol>
     </WidgetShell>
   );
 }

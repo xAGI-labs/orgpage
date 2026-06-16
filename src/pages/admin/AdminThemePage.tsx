@@ -12,8 +12,7 @@ const widgetLabels: Array<[WidgetKey, string]> = [
   ["links", "Links"],
   ["leaderboard", "Leaderboard"],
   ["shoutouts", "Shoutouts"],
-  ["calendar", "Calendar"],
-  ["quickActions", "Quick actions"]
+  ["calendar", "Calendar"]
 ];
 
 export function AdminThemePage() {

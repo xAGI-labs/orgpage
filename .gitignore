@@ -1,5 +1,6 @@
 node_modules
 dist
+lib
 release
 .playwright-mcp
 orgpage-*-1280x800.png
@@ -8,3 +9,5 @@ orgpage-*-1280x800.png
 .firebase
 firebase-debug.log
 *.tsbuildinfo
+.claude/
+.impeccable/config.local.json

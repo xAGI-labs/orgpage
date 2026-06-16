@@ -11,7 +11,7 @@ import { demoUser } from "../data/demo";
 import { ensureUserProfile } from "../data/orgStore";
 import { auth, isFirebaseConfigured, trackEvent } from "../lib/firebase";
 import { signInWithGoogle as chromeGoogleLogin } from "../lib/chromeAuth";
-import type { AppUser } from "../types/orgpage";
+import type { AppUser } from "@orgpage/shared";
 
 interface AuthContextValue {
   user: AppUser | null;

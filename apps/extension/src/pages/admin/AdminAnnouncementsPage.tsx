@@ -4,7 +4,7 @@ import { Field, Select, TextArea } from "../../components/Field";
 import { WidgetShell } from "../../components/WidgetShell";
 import { useOrg } from "../../context/OrgContext";
 import { formatShortDate } from "../../lib/date";
-import type { Announcement } from "../../types/orgpage";
+import type { Announcement } from "@orgpage/shared";
 
 export function AdminAnnouncementsPage() {
   const { bundle, addAnnouncement } = useOrg();

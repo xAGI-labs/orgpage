@@ -2,36 +2,26 @@
   "name": "orgpage",
   "version": "0.1.0",
   "private": true,
-  "description": "A production-ready Chrome new tab company noticeboard extension.",
+  "description": "Orgpage monorepo: Chrome new-tab extension + Firebase backend.",
   "type": "module",
   "scripts": {
-    "dev": "vite --host 127.0.0.1",
-    "build": "tsc --noEmit && vite build",
-    "preview": "vite preview --host 127.0.0.1",
-    "lint": "eslint . --max-warnings=0"
-  },
-  "dependencies": {
-    "clsx": "^2.1.1",
-    "firebase": "^11.0.0",
-    "lucide-react": "^0.468.0",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
-    "react-router-dom": "^6.28.0"
+    "dev": "pnpm --filter @orgpage/extension dev",
+    "build": "pnpm -r build",
+    "build:extension": "pnpm --filter @orgpage/extension build",
+    "build:functions": "pnpm --filter @orgpage/functions build",
+    "lint": "pnpm -r lint",
+    "typecheck": "pnpm -r typecheck",
+    "deploy:hosting": "pnpm build:extension && firebase deploy --only hosting",
+    "deploy:functions": "firebase deploy --only functions",
+    "deploy:rules": "firebase deploy --only firestore:rules"
   },
   "devDependencies": {
-    "@types/chrome": "^0.0.287",
-    "@types/react": "^18.3.12",
-    "@types/react-dom": "^18.3.1",
+    "@eslint/js": "^9.16.0",
     "@typescript-eslint/eslint-plugin": "^8.16.0",
     "@typescript-eslint/parser": "^8.16.0",
-    "@vitejs/plugin-react": "^6.0.2",
-    "autoprefixer": "^10.4.20",
     "eslint": "^9.16.0",
     "eslint-plugin-react-hooks": "^5.1.0",
     "eslint-plugin-react-refresh": "^0.4.16",
-    "postcss": "^8.4.49",
-    "tailwindcss": "^3.4.16",
-    "typescript": "^5.7.2",
-    "vite": "^8.0.16"
+    "typescript": "^5.7.2"
   }
 }

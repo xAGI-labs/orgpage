@@ -1,6 +1,6 @@
 import { addDays } from "../lib/date";
-import type { AppUser, OrgBundle, OrgTheme } from "../types/orgpage";
-import { defaultWidgets } from "../types/orgpage";
+import type { AppUser, OrgBundle, OrgTheme } from "@orgpage/shared";
+import { defaultWidgets } from "@orgpage/shared";
 
 export const demoUser: AppUser = {
   uid: "demo-user",

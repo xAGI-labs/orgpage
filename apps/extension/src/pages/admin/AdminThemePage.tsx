@@ -3,7 +3,7 @@ import { Button } from "../../components/Button";
 import { Field, Select, TextArea } from "../../components/Field";
 import { WidgetShell } from "../../components/WidgetShell";
 import { useOrg } from "../../context/OrgContext";
-import type { OrgTheme, WidgetKey } from "../../types/orgpage";
+import type { OrgTheme, WidgetKey } from "@orgpage/shared";
 
 const widgetLabels: Array<[WidgetKey, string]> = [
   ["welcome", "Welcome"],

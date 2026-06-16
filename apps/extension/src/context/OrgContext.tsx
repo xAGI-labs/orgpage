@@ -27,7 +27,7 @@ import type {
   Organization,
   Role,
   Shoutout
-} from "../types/orgpage";
+} from "@orgpage/shared";
 import { useAuth } from "./AuthContext";
 
 interface OrgContextValue {

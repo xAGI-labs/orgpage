@@ -32,7 +32,7 @@ import type {
   Role,
   Shoutout,
   UserProfile
-} from "../types/orgpage";
+} from "@orgpage/shared";
 
 const DEMO_KEY = "orgpage-demo-bundle";
 

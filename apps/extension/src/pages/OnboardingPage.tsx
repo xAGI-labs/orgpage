@@ -4,7 +4,7 @@ import { useNavigate, Link } from "react-router-dom";
 import { Button } from "../components/Button";
 import { Field, Select } from "../components/Field";
 import { useOrg } from "../context/OrgContext";
-import type { OrgTheme } from "../types/orgpage";
+import type { OrgTheme } from "@orgpage/shared";
 
 export function OnboardingPage() {
   const navigate = useNavigate();

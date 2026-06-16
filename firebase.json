@@ -3,7 +3,7 @@
     "rules": "firestore.rules"
   },
   "hosting": {
-    "public": "dist",
+    "public": "apps/extension/dist",
     "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
     "rewrites": [
       {
@@ -22,5 +22,14 @@
         ]
       }
     ]
-  }
+  },
+  "functions": [
+    {
+      "source": "apps/functions",
+      "codebase": "default",
+      "runtime": "nodejs22",
+      "predeploy": "pnpm --filter @orgpage/functions build",
+      "ignore": ["src", "tsconfig.json", "esbuild.config.mjs", "node_modules"]
+    }
+  ]
 }

@@ -5,7 +5,7 @@ import { Field, Select } from "../../components/Field";
 import { WidgetShell } from "../../components/WidgetShell";
 import { useOrg } from "../../context/OrgContext";
 import { formatShortDate } from "../../lib/date";
-import type { Role } from "../../types/orgpage";
+import type { Role } from "@orgpage/shared";
 
 export function AdminInvitesPage() {
   const { bundle, inviteMember, revokeMemberInvite } = useOrg();

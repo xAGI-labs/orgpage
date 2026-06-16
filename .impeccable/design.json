@@ -1,0 +1,323 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-06-16T00:00:00.000Z",
+  "title": "Design System: Orgpage",
+  "extensions": {
+    "colorMeta": {
+      "brand-workshop-pine": {
+        "role": "primary",
+        "displayName": "Workshop Pine",
+        "canonical": "oklch(45% 0.08 145)",
+        "tonalRamp": [
+          "oklch(15% 0.06 145)",
+          "oklch(23% 0.07 145)",
+          "oklch(31% 0.08 145)",
+          "oklch(39% 0.08 145)",
+          "oklch(45% 0.08 145)",
+          "oklch(63% 0.07 145)",
+          "oklch(80% 0.05 145)",
+          "oklch(95% 0.025 145)"
+        ]
+      },
+      "brand-wash": {
+        "role": "primary",
+        "displayName": "Pine Wash",
+        "canonical": "color-mix(in oklch, oklch(45% 0.08 145) 13%, oklch(99% 0.012 86))",
+        "tonalRamp": [
+          "oklch(80% 0.025 130)",
+          "oklch(85% 0.022 125)",
+          "oklch(89% 0.02 120)",
+          "oklch(92% 0.018 115)",
+          "oklch(94% 0.015 110)",
+          "oklch(96% 0.012 105)",
+          "oklch(98% 0.009 100)",
+          "oklch(99% 0.006 95)"
+        ]
+      },
+      "lobby-paper": {
+        "role": "neutral",
+        "displayName": "Lobby Paper",
+        "canonical": "oklch(96% 0.018 86)",
+        "tonalRamp": [
+          "oklch(20% 0.015 86)",
+          "oklch(35% 0.015 86)",
+          "oklch(50% 0.018 86)",
+          "oklch(65% 0.018 86)",
+          "oklch(80% 0.018 86)",
+          "oklch(90% 0.018 86)",
+          "oklch(96% 0.018 86)",
+          "oklch(99% 0.012 86)"
+        ]
+      },
+      "notice-sheet": {
+        "role": "neutral",
+        "displayName": "Notice Sheet",
+        "canonical": "oklch(99% 0.012 86)",
+        "tonalRamp": [
+          "oklch(22% 0.012 86)",
+          "oklch(38% 0.012 86)",
+          "oklch(55% 0.012 86)",
+          "oklch(70% 0.012 86)",
+          "oklch(83% 0.012 86)",
+          "oklch(92% 0.012 86)",
+          "oklch(96% 0.012 86)",
+          "oklch(99% 0.012 86)"
+        ]
+      },
+      "paper-soft": {
+        "role": "neutral",
+        "displayName": "Paper Soft",
+        "canonical": "oklch(92% 0.02 86)",
+        "tonalRamp": [
+          "oklch(20% 0.018 86)",
+          "oklch(35% 0.018 86)",
+          "oklch(50% 0.02 86)",
+          "oklch(65% 0.02 86)",
+          "oklch(80% 0.02 86)",
+          "oklch(86% 0.02 86)",
+          "oklch(92% 0.02 86)",
+          "oklch(96% 0.018 86)"
+        ]
+      },
+      "pressed-ink": {
+        "role": "neutral",
+        "displayName": "Pressed Ink",
+        "canonical": "oklch(24% 0.025 104)",
+        "tonalRamp": [
+          "oklch(15% 0.02 104)",
+          "oklch(24% 0.025 104)",
+          "oklch(35% 0.03 104)",
+          "oklch(45% 0.035 104)",
+          "oklch(58% 0.03 104)",
+          "oklch(72% 0.025 104)",
+          "oklch(85% 0.02 104)",
+          "oklch(95% 0.015 104)"
+        ]
+      },
+      "quiet-ink": {
+        "role": "neutral",
+        "displayName": "Quiet Ink",
+        "canonical": "oklch(45% 0.035 104)",
+        "tonalRamp": [
+          "oklch(18% 0.025 104)",
+          "oklch(28% 0.03 104)",
+          "oklch(38% 0.035 104)",
+          "oklch(45% 0.035 104)",
+          "oklch(58% 0.03 104)",
+          "oklch(72% 0.025 104)",
+          "oklch(85% 0.02 104)",
+          "oklch(95% 0.015 104)"
+        ]
+      },
+      "hairline": {
+        "role": "neutral",
+        "displayName": "Hairline",
+        "canonical": "oklch(84% 0.025 86)",
+        "tonalRamp": [
+          "oklch(25% 0.02 86)",
+          "oklch(40% 0.022 86)",
+          "oklch(55% 0.025 86)",
+          "oklch(68% 0.025 86)",
+          "oklch(78% 0.025 86)",
+          "oklch(84% 0.025 86)",
+          "oklch(91% 0.02 86)",
+          "oklch(97% 0.012 86)"
+        ]
+      },
+      "stamped-red": {
+        "role": "tertiary",
+        "displayName": "Stamped Red",
+        "canonical": "oklch(48% 0.15 28)",
+        "tonalRamp": [
+          "oklch(20% 0.1 28)",
+          "oklch(30% 0.13 28)",
+          "oklch(40% 0.15 28)",
+          "oklch(48% 0.15 28)",
+          "oklch(60% 0.13 28)",
+          "oklch(72% 0.1 28)",
+          "oklch(85% 0.06 28)",
+          "oklch(95% 0.03 28)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "Fraunces serif. Hero org-message on the new tab and the synthesized org-initial mark in the header. Nowhere else."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Today's Focus copy and large stat numbers. Carries by weight (900) at a tight scale."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Widget titles inside WidgetShell. Always paired with an eyebrow above it."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Welcome message, announcement bodies, shoutout messages. Line-height 1.75; capped at 65-75ch by the widget grid."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Field labels, secondary actions, member names, footer copy. The most common text size in the UI."
+      },
+      "eyebrow": {
+        "displayName": "Eyebrow",
+        "purpose": "Category label above widget titles ('Home base', 'Kudos', 'Today's focus'). Always paired with the title it labels; never standalone."
+      }
+    },
+    "shadows": [
+      {
+        "name": "paper-lift",
+        "value": "0 18px 48px color-mix(in oklch, oklch(24% 0.025 104) 9%, transparent)",
+        "purpose": "Default widget elevation. Wide, low, ink-tinted; reads as ambient room light, not a protruding card."
+      },
+      {
+        "name": "hero-lift",
+        "value": "0 24px 60px color-mix(in oklch, oklch(24% 0.025 104) 12%, transparent)",
+        "purpose": "Reserved for the single Workshop Pine hero block ('Today's Focus'). One step heavier than paper-lift."
+      },
+      {
+        "name": "focus-ring",
+        "value": "outline: 2px solid color-mix(in oklch, oklch(45% 0.08 145) 52%, transparent); outline-offset: 3px",
+        "purpose": "Keyboard-visible focus on every focusable surface. Pine at 52% strength, offset so it floats."
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease-out-quint",
+        "value": "cubic-bezier(0.16, 1, 0.3, 1)",
+        "purpose": "The only easing in the system. Used by the .enter widget reveal."
+      },
+      {
+        "name": "duration-enter",
+        "value": "560ms",
+        "purpose": "Widget enter reveal (opacity + 12px translateY). Gated behind prefers-reduced-motion: no-preference."
+      },
+      {
+        "name": "duration-state",
+        "value": "200ms",
+        "purpose": "Tailwind's default `transition` duration. Hover brightness, color, background swaps."
+      }
+    ],
+    "breakpoints": [
+      { "name": "sm", "value": "640px" },
+      { "name": "md", "value": "768px" },
+      { "name": "lg", "value": "1024px" },
+      { "name": "xl", "value": "1280px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "The single primary action per surface. Workshop Pine, hover brightens.",
+      "html": "<button class=\"ds-btn-primary\">Send kudos</button>",
+      "css": ".ds-btn-primary { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 40px; padding: 8px 16px; border-radius: 6px; border: none; background: oklch(45% 0.08 145); color: oklch(99% 0.012 86); font-family: Aptos, Satoshi, ui-sans-serif, system-ui, sans-serif; font-size: 14px; font-weight: 600; letter-spacing: 0; cursor: pointer; transition: filter 200ms, background 200ms; } .ds-btn-primary:hover { filter: brightness(0.95); } .ds-btn-primary:focus-visible { outline: 2px solid color-mix(in oklch, oklch(45% 0.08 145) 52%, transparent); outline-offset: 3px; } .ds-btn-primary:disabled { opacity: 0.6; cursor: not-allowed; }"
+    },
+    {
+      "name": "Secondary Button",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "Sibling action that isn't the page's primary. Notice Sheet with hairline border.",
+      "html": "<button class=\"ds-btn-secondary\">Admin</button>",
+      "css": ".ds-btn-secondary { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 40px; padding: 8px 16px; border-radius: 6px; border: 1px solid oklch(84% 0.025 86); background: oklch(99% 0.012 86); color: oklch(24% 0.025 104); font-family: Aptos, Satoshi, ui-sans-serif, system-ui, sans-serif; font-size: 14px; font-weight: 600; cursor: pointer; transition: background 200ms; } .ds-btn-secondary:hover { background: color-mix(in oklch, oklch(45% 0.08 145) 13%, oklch(99% 0.012 86)); } .ds-btn-secondary:focus-visible { outline: 2px solid color-mix(in oklch, oklch(45% 0.08 145) 52%, transparent); outline-offset: 3px; }"
+    },
+    {
+      "name": "Ghost Button",
+      "kind": "button",
+      "refersTo": "button-ghost",
+      "description": "Tertiary action in dense areas. Transparent at rest, Pine Wash on hover.",
+      "html": "<button class=\"ds-btn-ghost\">Logout</button>",
+      "css": ".ds-btn-ghost { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 40px; padding: 8px 16px; border-radius: 6px; border: none; background: transparent; color: oklch(45% 0.035 104); font-family: Aptos, Satoshi, ui-sans-serif, system-ui, sans-serif; font-size: 14px; font-weight: 600; cursor: pointer; transition: background 200ms, color 200ms; } .ds-btn-ghost:hover { background: color-mix(in oklch, oklch(45% 0.08 145) 13%, oklch(99% 0.012 86)); color: oklch(24% 0.025 104); } .ds-btn-ghost:focus-visible { outline: 2px solid color-mix(in oklch, oklch(45% 0.08 145) 52%, transparent); outline-offset: 3px; }"
+    },
+    {
+      "name": "Danger Button",
+      "kind": "button",
+      "refersTo": "button-danger",
+      "description": "Destructive confirm only. Stamped Red, hover brightens.",
+      "html": "<button class=\"ds-btn-danger\">Delete invite</button>",
+      "css": ".ds-btn-danger { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 40px; padding: 8px 16px; border-radius: 6px; border: none; background: oklch(48% 0.15 28); color: oklch(99% 0.012 86); font-family: Aptos, Satoshi, ui-sans-serif, system-ui, sans-serif; font-size: 14px; font-weight: 600; cursor: pointer; transition: filter 200ms; } .ds-btn-danger:hover { filter: brightness(0.95); } .ds-btn-danger:focus-visible { outline: 2px solid color-mix(in oklch, oklch(45% 0.08 145) 52%, transparent); outline-offset: 3px; }"
+    },
+    {
+      "name": "Text Field",
+      "kind": "input",
+      "refersTo": "input",
+      "description": "Labeled single-line input. Label above, never inline-placeholder-as-label.",
+      "html": "<label class=\"ds-field\"><span class=\"ds-field-label\">To</span><input class=\"ds-field-input\" type=\"text\" placeholder=\"Teammate name\"></label>",
+      "css": ".ds-field { display: grid; gap: 8px; font-family: Aptos, Satoshi, ui-sans-serif, system-ui, sans-serif; color: oklch(24% 0.025 104); } .ds-field-label { font-size: 14px; font-weight: 600; } .ds-field-input { min-height: 44px; padding: 0 12px; border-radius: 6px; border: 1px solid oklch(84% 0.025 86); background: oklch(99% 0.012 86); color: oklch(24% 0.025 104); font: inherit; font-size: 14px; outline: none; transition: border-color 200ms; } .ds-field-input::placeholder { color: oklch(45% 0.035 104); } .ds-field-input:focus-visible { outline: 2px solid color-mix(in oklch, oklch(45% 0.08 145) 52%, transparent); outline-offset: 3px; }"
+    },
+    {
+      "name": "Widget Shell",
+      "kind": "card",
+      "refersTo": "widget-shell",
+      "description": "The canonical widget container. Eyebrow + Title pair in the header, optional action slot right, body below.",
+      "html": "<section class=\"ds-widget\"><header class=\"ds-widget-header\"><div><p class=\"ds-widget-eyebrow\">Home base</p><h2 class=\"ds-widget-title\">Welcome, Avi</h2></div></header><p class=\"ds-widget-body\">Have a calm Tuesday. Three onboarding steps are waiting whenever you have a minute.</p></section>",
+      "css": ".ds-widget { padding: 20px; border-radius: 8px; border: 1px solid oklch(84% 0.025 86); background: color-mix(in oklch, oklch(99% 0.012 86) 88%, transparent); box-shadow: 0 18px 48px color-mix(in oklch, oklch(24% 0.025 104) 9%, transparent); font-family: Aptos, Satoshi, ui-sans-serif, system-ui, sans-serif; color: oklch(24% 0.025 104); } .ds-widget-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; margin-bottom: 16px; } .ds-widget-eyebrow { margin: 0; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: oklch(45% 0.035 104); } .ds-widget-title { margin: 4px 0 0 0; font-size: 18px; font-weight: 700; line-height: 1.25; } .ds-widget-body { margin: 0; font-size: 16px; line-height: 1.75; color: oklch(45% 0.035 104); }"
+    },
+    {
+      "name": "Hero Block",
+      "kind": "custom",
+      "refersTo": "hero-block",
+      "description": "The single Workshop Pine surface on the new tab. Today's Focus.",
+      "html": "<section class=\"ds-hero\"><svg class=\"ds-hero-icon\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z\"/></svg><div class=\"ds-hero-body\"><p class=\"ds-hero-eyebrow\">Today's focus</p><p class=\"ds-hero-headline\">Ship the onboarding revamp before Friday standup.</p></div></section>",
+      "css": ".ds-hero { display: flex; align-items: flex-start; gap: 12px; padding: 24px; border-radius: 8px; background: oklch(45% 0.08 145); color: oklch(99% 0.012 86); box-shadow: 0 24px 60px color-mix(in oklch, oklch(24% 0.025 104) 12%, transparent); font-family: Aptos, Satoshi, ui-sans-serif, system-ui, sans-serif; } .ds-hero-icon { width: 20px; height: 20px; margin-top: 4px; flex-shrink: 0; } .ds-hero-body { display: grid; gap: 8px; } .ds-hero-eyebrow { margin: 0; font-size: 12px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.14em; opacity: 0.75; } .ds-hero-headline { margin: 0; font-size: 24px; font-weight: 900; line-height: 1.15; }"
+    },
+    {
+      "name": "Profile Avatar",
+      "kind": "custom",
+      "refersTo": "avatar-square",
+      "description": "Squared, never circular. Workshop Pine + Notice Sheet initials when no image.",
+      "html": "<div class=\"ds-avatar\">AV</div>",
+      "css": ".ds-avatar { display: grid; place-items: center; width: 40px; height: 40px; border-radius: 6px; background: oklch(45% 0.08 145); color: oklch(99% 0.012 86); font-family: Aptos, Satoshi, ui-sans-serif, system-ui, sans-serif; font-size: 14px; font-weight: 900; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Office Lobby",
+    "overview": "Orgpage is the well-kept lobby of a small startup. People pass through it on the way to actual work — many times a day, mid-thought, mid-flow. The room is warm, but it isn't trying to entertain you. The walls are paper. The notices are typeset. The plant in the corner is real. The page should reward a glance and disappear from mind by the time the tab is gone.\n\nThe system is built from a single warm neutral (Lobby Paper), a quiet pine green accent (Workshop Pine), a small sans family doing most of the work, and one serif (Fraunces) reserved for the moment of arrival. Density is medium: widgets sit on a 12-column grid with breathing room, never on a Sharepoint-grade information shelf. Motion is restrained — a single 560 ms ease-out enter, hover-brightness on actions, nothing choreographed.\n\nThe system explicitly rejects: the SaaS hero-metric template; identical icon-and-heading card grids; tracked-uppercase eyebrows used as section scaffolding; gradient text, glassmorphism, and side-stripe borders; any push toward further warm-cream surfaces (the Lobby Paper is the system's warmth, not the floor of more warmth).",
+    "keyCharacteristics": [
+      "Warm paper backdrop, near-white widget surfaces, one quiet green accent.",
+      "One sans family (Aptos / Satoshi stack) for everything except the hero serif moment.",
+      "Squared geometry: rounded-md (6px) on small controls, rounded-lg (8px) on widgets and the hero. Avatars are squared, not circular.",
+      "Diffuse, wide, low-opacity shadows. Surfaces lift, never pop.",
+      "A single OKLCH token vocabulary; no hex anywhere in the codebase. --brand is themable per organization via inline CSS variables on the app shell."
+    ],
+    "rules": [
+      { "name": "The Quiet Pine Rule", "body": "Workshop Pine appears on ≤10% of any given screen: primary actions, the hero 'Today's Focus' block, the focus ring, the loading spinner, the org mark, and the source of brand-wash. If a third bright pine surface shows up on the same page, one of them is wrong. Its rarity is what makes it carry.", "section": "colors" },
+      { "name": "The No-Default-Cream Rule", "body": "Lobby Paper is the system's warmth, not the floor of more warmth. Do not introduce paper-textured backgrounds, tan tints on cards, warm gradients on widgets, or kraft-paper imagery. The brief is 'warm office lobby,' not 'magazine spread.' If a future surface needs more warmth, the warmth must come from typography, copy, or a portrait — not background fills.", "section": "colors" },
+      { "name": "The Single-Hot-Color Rule", "body": "Stamped Red is the only saturated non-pine color in the system. Never use red for highlight, never use orange for warning, never use yellow for caution. Warning and caution states use Pressed Ink + an icon, not color. Color is reserved for action (pine) and danger (red).", "section": "colors" },
+      { "name": "The Display Serif Earns Each Use Rule", "body": "Fraunces appears in exactly two places: the hero org-message h1 on the new tab, and the org-initial mark in the header when no logo is set. Never in widget titles. Never in body. Never in admin. The serif's job is to mark arrival. Spreading it dilutes the moment.", "section": "typography" },
+      { "name": "The Category Eyebrow Rule", "body": "The eyebrow is a CATEGORY label, not section scaffolding. 'Home base,' 'Kudos,' 'Today's focus' — each names what a thing IS. Every widget has exactly one, baked into WidgetShell. Adding tracked-uppercase kickers ('ABOUT,' 'PROCESS,' 'PRICING,' 'FEATURES') on top of titles to give a page a marketing rhythm is banned. If you find yourself writing an eyebrow that could be deleted without the title losing meaning, delete it.", "section": "typography" },
+      { "name": "The Weight-Before-Size Rule", "body": "When a number or short string needs to feel important, reach for font-black (900) at the existing size before bumping the size. The Welcome tile counts are font-black at text-xl, not regular at text-3xl. The system's voice is heavy-weight at a tight scale, not loud-size at body weight.", "section": "typography" },
+      { "name": "The Diffuse-Lift Rule", "body": "Shadows are wide (≥48px blur), low (≤24px offset), and quiet (≤12% opacity, tinted toward Pressed Ink). Tight punchy shadows are banned. Glassmorphism — backdrop-blur on cards — is banned. The room is lit from above and diffused; no element gets a spotlight.", "section": "elevation" },
+      { "name": "The Two-Step Lift Rule", "body": "Exactly two elevation levels exist: Paper Lift (widgets) and Hero Lift (the single hero block). Inventing a third (modal lift, dropdown lift, toast lift) is a smell — if a modal needs to feel above the page, use a scrim and the Paper Lift, not a third shadow.", "section": "elevation" },
+      { "name": "The Squared Avatar Rule", "body": "Avatars and org marks are rounded-md squares, not circles. This is the most distinctive component choice in the system — every other AI-generated dashboard reaches for circles. The square avatar carries 'this is a workshop, not a social network.'", "section": "components" },
+      { "name": "The Single Hero Block Rule", "body": "The 'Today's Focus' hero is the only Workshop Pine surface block on the new tab. No second pine block. No tile grids with one pine tile. If the page needs another moment of emphasis, use weight and a heavier shadow, not more pine.", "section": "components" },
+      { "name": "The Earned Eyebrow Rule", "body": "WidgetShell accepts the eyebrow as optional, and the default is no eyebrow. Add one only when the title alone fails to place the widget — when the category is a real meaning the title doesn't carry ('Home base' for Welcome, 'Kudos' for Shoutouts, 'Momentum' for Leaderboard, the date for Calendar). If the eyebrow could be deleted without the title losing meaning, delete it. Eyebrows competing across every widget read as marketing scaffolding; sparing them is what keeps the ones that remain meaningful.", "section": "components" }
+    ],
+    "dos": [
+      "Do anchor every widget on the WidgetShell eyebrow → title pair (text-xs font-bold uppercase tracking-[0.12em] text-[var(--muted)] + text-lg font-bold leading-tight). Consistency widget-to-widget is the rhythm.",
+      "Do keep Workshop Pine on ≤10% of any visible surface. Primary buttons, focus ring, the single hero block, the org mark.",
+      "Do use font-black (900) before bumping size when a number or name needs weight. Tight scale, heavy weight; that's the voice.",
+      "Do keep avatars and org marks rounded-md squares. The squared-avatar choice is signature.",
+      "Do gate every animation behind @media (prefers-reduced-motion: no-preference) and provide a calm crossfade or instant alternative. The .enter reveal is the existing pattern; copy it.",
+      "Do use OKLCH for every color. The codebase has no hex; do not introduce any.",
+      "Do ship default + hover + focus-visible + disabled (+ loading where relevant) for every interactive component. No half-built components."
+    ],
+    "donts": [
+      "Don't ship hero metric tiles (active members, announcement counts, weekly leaderboard rank) as decoration. Orgpage is not a KPI dashboard for the team's own existence. The WelcomeWidget Member/Update/Link tiles are the ceiling of count-tiles allowed, not the floor.",
+      "Don't use tracked-uppercase eyebrows above sections as marketing-style scaffolding. The category eyebrow in WidgetShell is voice; adding new ones above sub-sections is AI grammar.",
+      "Don't use numbered section markers (01 · 02 · 03) anywhere unless the section IS a real ordered sequence and the number carries information.",
+      "Don't ship identical icon-and-heading card grids ('Feature 1 / Feature 2 / Feature 3' same-size cards).",
+      "Don't use gradient text, decorative glassmorphism (backdrop-blur on cards), or side-stripe borders. All three are absolute bans.",
+      "Don't lean further into warm-cream. Lobby Paper is the system's warmth. Do not add paper textures, tan tints on cards, warm gradients on widgets, or kraft imagery.",
+      "Don't introduce a third elevation step. Paper Lift and Hero Lift are the two; modals reuse Paper Lift + a scrim, not a new shadow.",
+      "Don't use Fraunces anywhere except the new-tab hero message and the synthesized org-initial mark. Serif in widget titles dilutes the arrival moment.",
+      "Don't make avatars or org marks circular. Squared geometry is the system.",
+      "Don't invent new accent colors for highlight, warning, info, or selection. Use Workshop Pine for action and current selection; use Pressed Ink + an icon for warning. Stamped Red is for danger only.",
+      "Don't ship SharePoint-style density, gamified leaderboard energy (confetti, big emoji, primary-color spam), or BI-dashboard-style chart grids.",
+      "Don't use position: absolute dropdowns inside overflow-hidden containers. Use the native <dialog> / popover API or a portal."
+    ]
+  }
+}
